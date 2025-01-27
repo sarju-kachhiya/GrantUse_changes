@@ -195,6 +195,7 @@
                     class=""
                     action="Coregistraion.html"
                     method="POST"
+                    id="contact_form1"
                     name="contact_form"
                     
                   >
@@ -803,7 +804,23 @@
     <script src="public/assets/js/jquery-3.7.1.min.js"></script>
     <script src="public/assets/js/jquery.validate.min.js"></script>
     <script src="public/assets/js/additional-methods.min.js"></script>
+    <script>
+      document.getElementById('contact_form1').addEventListener('submit', function (event) {
+  event.preventDefault(); // Prevent default form submission behavior
 
-    <script src="public/assets/js/contact_us.js"></script>
+  // const alertMessage = document.getElementById('alertMessage');
+  // alertMessage.classList.remove('d-none'); // Show the success message
+
+  this.reset(); // Clear the form fields
+
+  // Redirect to another page after a delay (e.g., 3 seconds)
+  
+    window.location.href = 'Coregistraion.html'; // Replace with your target URL
+  
+});
+
+    </script>
+
+    <!-- <script src="public/assets/js/contact_us.js"></script> -->
   </body>
 </html>
