@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .error { color: red; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <div class="accordion" id="formAccordion">
+
+        <!-- First Accordion: Name, Email, Zip Code -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                    Step 1: Personal Information
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#formAccordion">
+                <div class="accordion-body">
+                    <label>Name:</label>
+                    <input type="text" id="name" class="form-control" required>
+                    <span class="error" id="error-name"></span>
+
+                    <label>Email:</label>
+                    <input type="email" id="email" class="form-control" required>
+                    <span class="error" id="error-email"></span>
+
+                    <label>Zip Code:</label>
+                    <input type="text" id="zip" class="form-control" required>
+                    <span class="error" id="error-zip"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Accordion: 4 Dropdowns -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                    Step 2: Select Options
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#formAccordion">
+                <div class="accordion-body">
+                    <label>Option 1:</label>
+                    <select id="dropdown1" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="A">Option A</option>
+                        <option value="B">Option B</option>
+                    </select>
+                    <span class="error" id="error-dropdown1"></span>
+
+                    <label>Option 2:</label>
+                    <select id="dropdown2" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="A">Option A</option>
+                        <option value="B">Option B</option>
+                    </select>
+                    <span class="error" id="error-dropdown2"></span>
+
+                    <label>Option 3:</label>
+                    <select id="dropdown3" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="A">Option A</option>
+                        <option value="B">Option B</option>
+                    </select>
+                    <span class="error" id="error-dropdown3"></span>
+
+                    <label>Option 4:</label>
+                    <select id="dropdown4" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="A">Option A</option>
+                        <option value="B">Option B</option>
+                    </select>
+                    <span class="error" id="error-dropdown4"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third Accordion: 3 Dropdowns & Submit -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                    Step 3: Final Selections
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#formAccordion">
+                <div class="accordion-body">
+                    <label>Final Option 1:</label>
+                    <select id="dropdown5" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="X">Option X</option>
+                        <option value="Y">Option Y</option>
+                    </select>
+                    <span class="error" id="error-dropdown5"></span>
+
+                    <label>Final Option 2:</label>
+                    <select id="dropdown6" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="X">Option X</option>
+                        <option value="Y">Option Y</option>
+                    </select>
+                    <span class="error" id="error-dropdown6"></span>
+
+                    <label>Final Option 3:</label>
+                    <select id="dropdown7" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="X">Option X</option>
+                        <option value="Y">Option Y</option>
+                    </select>
+                    <span class="error" id="error-dropdown7"></span>
+
+                    <!-- Submit Button -->
+                    <button type="button" class="btn btn-primary w-100 mt-3" id="submitForm">Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+document.getElementById("submitForm").addEventListener("click", function () {
+    let isValid = true;
+
+    // Clear previous error messages
+    document.querySelectorAll(".error").forEach(error => error.textContent = "");
+
+    // Check Name, Email, Zip Code
+    ["name", "email", "zip"].forEach(field => {
+        let input = document.getElementById(field);
+        if (!input.value.trim()) {
+            document.getElementById("error-" + field).textContent = "This field is required!";
+            isValid = false;
+        }
+    });
+
+    // Check all dropdowns
+    ["dropdown1", "dropdown2", "dropdown3", "dropdown4", "dropdown5", "dropdown6", "dropdown7"].forEach(dropdown => {
+        let select = document.getElementById(dropdown);
+        if (!select.value) {
+            document.getElementById("error-" + dropdown).textContent = "Please select an option!";
+            isValid = false;
+        }
+    });
+
+    // If all fields are filled, submit the form (for now, just alert success)
+    if (isValid) {
+        alert("Form submitted successfully!");
+    }
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

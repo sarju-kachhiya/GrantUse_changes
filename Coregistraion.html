@@ -54,6 +54,52 @@
       color: #155724; /* Dark green text */
       border-color: #c3e6cb; /* Border color */
       }
+      .card-header {
+    background-color: #f0f0f0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.accordion-title {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.accordion-title img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.icon-toggle {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.collapsed .icon-toggle {
+    transform: rotate(180deg);
+}
+.submitbtn{
+display: inline-block; 
+background-color: #3F78E0; 
+color: #f0f0f0; 
+text-decoration: none; 
+padding: 15px 30px; 
+border-radius: 10px; 
+font-size: 16px; 
+text-align: center; 
+width: 100%; 
+max-width: 300px; 
+font-weight: bold;
+}
+.submitbtn:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+}
     </style>
   </head>
   <body>
@@ -139,178 +185,380 @@
             ></div>
             <figure class="rounded">
               <img
-                src="public/assets/img/photos/coregi.png    "
+                src="public/assets/img/photos/coregi.png"
                 alt="about image"
               />
             </figure>
           </div>
           <!--/column -->
           <div class="col-md-8 col-lg-6 position-relative mx-auto">
-            <div class="card">
-              <div class="card-body">
-                <form
-                  class=""
-                  action="#"
-                  name="contact_form"
-                  id="contact_form1"
-                >
-                  <div class="row gx-6">
-                    <div class="col-12">
-                      <div class="form-floating mb-4">
-                        <input
-                          type="text"
-                          name="first_name"
-                          id="first_name"
-                          class="form-control"
-                        />
-                        <label for="first_name">Name *</label>
-                      </div>
-                    <div class="col-12">
-                      <div class="form-floating mb-4">
-                        <input
-                          type="email"
-                          name="email"
-                          id="email"
-                          class="form-control"
-                        />
-                        <label for="email">Email *</label>
-                      </div>
-                      
+            <div class="accordion" id="myFormAccordion">
+                <div class="card">
+                  <div class="card-header collapsed" id="headingPersonal" data-toggle="collapse" data-target="#collapsePersonal">
+                    <div class="accordion-title">
+                        <img src="public/assets/img/Demo_img.png" alt="Icon">
+                        <h3 class="mb-0 accordion-title">Personal Information</h3>
                     </div>
-                    <div class="col-12">
-                        <div class="form-floating mb-4">
-                          <input
-                            type="address"
-                            name="address"
-                            id="address"
-                            class="form-control"
-                          />
-                          <label for="address">Address *</label>
+                    <img src="public/assets/img/accordion_button.png" class="icon-toggle">
+                </div>
+                
+                    <div id="collapsePersonal" class="collapse show" data-parent="#myFormAccordion">
+                        <div class="card-body">
+                            <form id="personalForm">
+                                <div class="form-floating mb-4">
+                                    <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" required>
+                                    <label for="firstName">Name *</label>
+                                </div>
+                                <div class="form-floating mb-4">
+                                    <input type="email" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" id="email" placeholder="Enter Email" required>
+                                    <label for="email">Email *</label>
+                                </div>
+                                <div class="form-floating mb-4">
+                                  <input type="text" class="form-control" pattern="^\d{5}(-\d{4})?$" maxlength="5" id="zip" placeholder="Enter zipcode" required>
+                                  <label for="zip">Zip *</label>
+                              </div>
+                                <button type="button" class="btn btn-primary w-100" id="personalNext">Next</button>
+                            </form>
                         </div>
-                        
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-floating mb-4">
-                            <input
-                                type="zip"
-                                name="zip"
-                                id="zip"
-                                class="form-control"
-                            />
-                            <label for="zip">Zip Code *</label>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header collapsed " id="headingEligibility" data-toggle="collapse" data-target="#collapseEligibility">
+                        <h3 class="mb-0 accordion-title">
+                            <img src="public/assets/img/Demo_img.png" height="40" width="40" alt="Icon"> Eligibility & Interests 
+                        </h3>
+                        <img src="public/assets/img/accordion_button.png" height="20" width="20" class="icon-toggle">
+                    </div>
+                    <div id="collapseEligibility" class="collapse" data-parent="#myFormAccordion">
+                      <div class="card-body">
+                          <form id="eligibilityForm">                  
+                              <div class="mb-4">
+                                <label class="form-label">Which type of assistance are you most interested in?</label>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary w-100 dropdown-toggle d-flex align-items-center justify-content-between" type="button" id="countryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span id="selectedCountry">
+                                            <span id="selectedCountryText">-- Select One Option --</span>
+                                        </span>
+                                    </button>
+                                    <ul class="dropdown-menu w-100" aria-labelledby="countryDropdown">
+                                        <li>
+                                            <label class="dropdown-item d-flex align-items-center">
+                                                <input type="radio" name="interest_choice" value="Government" class="me-2 country-radio" required>
+                                                <img src="public/assets/img/icon/govt.grant.png" alt="govt." width="25" class="me-2">
+                                                Government Grants
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="dropdown-item d-flex align-items-center">
+                                                <input type="radio" name="interest_choice" value="Education" class="me-2 country-radio" required>
+                                                <img src="public/assets/img/icon/education.grant.png" alt="edu." width="25" class="me-2">
+                                                Education Grants
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="dropdown-item d-flex align-items-center">
+                                                <input type="radio" name="interest_choice" value="scholarship" class="me-2 country-radio" required>
+                                                <img src="public/assets/img/icon/scholarship.grant.png" alt="scholarship" width="25" class="me-2">
+                                                Scholarships
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="dropdown-item d-flex align-items-center">
+                                                <input type="radio" name="interest_choice" value="Business" class="me-2 country-radio" required>
+                                                <img src="public/assets/img/icon/business.grant.png" alt="biz" width="25" class="me-2">
+                                                Business Funding
+                                            </label>
+                                        </li>
+                                        <li>
+                                          <label class="dropdown-item d-flex align-items-center">
+                                              <input type="radio" name="interest_choice" value="Debt" class="me-2 country-radio" required>
+                                              <img src="public/assets/img/icon/debt.grant.png" alt="debt." width="25" class="me-2">
+                                              Debt Assistance
+                                          </label>
+                                      </li>
+                                      <li>
+                                        <label class="dropdown-item d-flex align-items-center">
+                                            <input type="radio" name="interest_choice" value="Home" class="me-2 country-radio" required>
+                                            <img src="public/assets/img/icon/home.grant.png" alt="home" width="25" class="me-2">
+                                            Home Buying Assistance
+                                        </label>
+                                    </li>
+                                    </ul>
+                                </div>
                             </div>
-                            
-                        </div>
-                        <div class="col-6">
-                            <div class="form-floating mb-4">
-                            <input
-                                type="number"
-                                name="number"
-                                id="number"
-                                class="form-control"
-                            />
-                            <label for="number">Mobile Number *</label>
-                            </div>
-                            
-                        </div>
-                   </div>  
-                   <div class="col-12">
-                    <div class="form-floating mb-4">
-                      <input
-                        type="text"
-                        name="number1"
-                        id="number1"
-                        maxlength="12"
-                        minlength="12"
-                        pattern="\d{12}"
-                        required
-                        inputmode="numeric"
-                        class="form-control"
-                        placeholder="Enter 12 Digit Crad Number"
-                      />
-                      <label for="number1">Card Number *</label>
-                    </div>
-                    
-                 </div>    
-                 <div class="row">
-                    <div class="col-6">
-                        <div class="form-floating mb-4">
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="expiry"
-                            required
-                            placeholder="MM/YY"
-                            maxlength="5"
-                            oninput="formatExpiryField(this)"
-                        />
-                            <i class="fas fa-calendar-alt"></i>  
-                        <label for="expiry">Expiry *</label>
-                        </div>
-                        
-                    </div>
-                    <div class="col-6">
-                        <div class="form-floating mb-4">
-                        <input
-                            type="text"
-                            name="number2"
-                            id="cvv"
-                            maxlength="3"
-                            minlength="3"
-                            pattern="\d{3}"
-                            inputmode="numeric"
-                            required
-                            placeholder="Enter 3-digit CVV"
-                            class="form-control"
-                        />
-                        <label for="number2">Cvv *</label>
-                        </div>
-                        
-                    </div>
-               </div>              
-                    
-                    <!-- /column -->
+                            <div class="mb-4">
+                              <label class="form-label">Are you a U.S. citizen or permanent resident?</label>
+                              <div class="dropdown">
+                                  <button class="btn btn-outline-secondary w-100 dropdown-toggle d-flex align-items-center justify-content-between" type="button" id="countryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                      <span id="selectedCountry">
+                                          <span id="selectedCountryText">-- Select One Option --</span>
+                                      </span>
+                                  </button>
+                                  <ul class="dropdown-menu w-100" aria-labelledby="countryDropdown">
+                                      <li>
+                                          <label class="dropdown-item d-flex align-items-center">
+                                              <input type="radio" name="residency_choice" value="yes" class="me-2 country-radio" required>
+                                              <img src="public/assets/img/icon/yes.png" alt="agree" width="25" class="me-2">
+                                              Yes
+                                          </label>
+                                      </li>
+                                      <li>
+                                          <label class="dropdown-item d-flex align-items-center">
+                                              <input type="radio" name="residency_choice" value="no" class="me-2 country-radio" required>
+                                              <img src="public/assets/img/icon/no.png" alt="disagree" width="25" class="me-2">
+                                              No
+                                          </label>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="mb-4">
+                            <label class="form-label">What is your relationship status ?</label>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary w-100 dropdown-toggle d-flex align-items-center justify-content-between" type="button" id="countryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span id="selectedCountry">
+                                        <span id="selectedCountryText">-- Select One Option --</span>
+                                    </span>
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="countryDropdown">
+                                    <li>
+                                        <label class="dropdown-item d-flex align-items-center">
+                                            <input type="radio" name="marital_choice" value="single" class="me-2 country-radio" required>
+                                            <img src="public/assets/img/icon/single.png" alt="single" width="25" class="me-2">
+                                            Single
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item d-flex align-items-center">
+                                            <input type="radio" name="marital_choice" value="married" class="me-2 country-radio" required>
+                                            <img src="public/assets/img/icon/married.png" alt="marries" width="25" class="me-2">
+                                            Married
+                                        </label>
+                                    </li>
 
-                    <div class="col-12 text-center">
-                      <button
-                        type="submit"
-                        name="contact_us_button"
-                        id="contact_us_button"
-                        class="btn btn-primary rounded-pill btn-send mb-3 w-100"
-                      >
-                        Submit My Details
-                      </button>
-                      <div id="alertMessage" class="alert custom-alert mt-4 d-none" role="alert">
-                        Thank you for submitting your details! We will contact you via phone and email for further proceedings.
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                          <label class="form-label">Do you belong to any of the following groups?</label>
+                          <div class="dropdown">
+                              <button class="btn btn-outline-secondary w-100 dropdown-toggle d-flex align-items-center justify-content-between" type="button" id="countryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <span id="selectedCountry">
+                                      <span id="selectedCountryText">-- Select One Option --</span>
+                                  </span>
+                              </button>
+                              <ul class="dropdown-menu w-100" aria-labelledby="countryDropdown">
+                                  <li>
+                                      <label class="dropdown-item d-flex align-items-center">
+                                          <input type="radio" name="group_choice" value="Minority" class="me-2 country-radio" required>
+                                          <img src="public/assets/img/icon/minority.png" alt="Minority" width="25" class="me-2">
+                                          Minority
+                                      </label>
+                                  </li>
+                                  <li>
+                                      <label class="dropdown-item d-flex align-items-center">
+                                          <input type="radio" name="group_choice" value="Women" class="me-2 country-radio" required>
+                                          <img src="public/assets/img/icon/women.png" alt="Women" width="25" class="me-2">
+                                          Women
+                                      </label>
+                                  </li>
+                                  <li>
+                                      <label class="dropdown-item d-flex align-items-center">
+                                          <input type="radio" name="group_choice" value="Veteran" class="me-2 country-radio" required>
+                                          <img src="public/assets/img/icon/veteran.png" alt="Veteran" width="25" class="me-2">
+                                          Veteran
+                                      </label>
+                                  </li>
+                                  <li>
+                                      <label class="dropdown-item d-flex align-items-center">
+                                          <input type="radio" name="group_choice" value="Student" class="me-2 country-radio" required>
+                                          <img src="public/assets/img/icon/student.png" alt="Student" width="25" class="me-2">
+                                          Student
+                                      </label>
+                                  </li>
+                                  <li>
+                                    <label class="dropdown-item d-flex align-items-center">
+                                        <input type="radio" name="group_choice" value="lowincome" class="me-2 country-radio" required>
+                                        <img src="public/assets/img/icon/lowincome.png" alt="lowincome" width="25" class="me-2">
+                                        Low-Income Individual
+                                    </label>
+                                </li>
+                                <li>
+                                  <label class="dropdown-item d-flex align-items-center">
+                                      <input type="radio" name="group_choice" value="none" class="me-2 country-radio" required>
+                                      <img src="public/assets/img/icon/none.png" alt="none" width="25" class="me-2">
+                                      None of the above
+                                  </label>
+                              </li>
+                              </ul>
+                          </div>
                       </div>
-                      <!-- <input type="submit" class="btn btn-primary rounded-pill btn-send mb-3 w-100" value="Check Your Eligibility"> -->
-                      <p class="text-muted mb-0">
-                        By clicking "Submit My Details", you confirm that
-                        you are 18+ years of age and agree to (1) the
-                        <a href="terms.html"> Terms and Conditions</a>
-                        and
-                        <a href="privacy.html"> Privacy Policy</a>
-                        (2) to receive email from us in our network which may
-                        include commercial offers generally relevant to our
-                        members.
-                      </p>
-                    </div>
-                    <!-- /column -->
+                  
+                              <!-- Next Button -->
+                              <button type="button" class="btn btn-primary w-100" id="eligibilityNext">Next</button>
+                          </form>
+                      </div>
                   </div>
-                  <!-- /.row -->
-                </form>
-              </div>
+                  
+                </div>
+        
+                <div class="card">
+                    <div class="card-header collapsed" id="headingAdditional" data-toggle="collapse" data-target="#collapseAdditional">
+                        <h3 class="mb-0 accordion-title">
+                            <img src="public/assets/img/Demo_img.png" height="40" width="40" alt="Icon"> Additional Details & Preferences 
+                        </h3>
+                        <img src="public/assets/img/accordion_button.png" height="20" width="20" class="icon-toggle">
+                    </div>
+                    <div id="collapseAdditional" class="collapse" data-parent="#myFormAccordion">
+                        <div class="card-body">
+                            <form>
+                              <div class="mb-4">
+                                <label class="form-label">What is your highest level of education?</label>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary w-100 dropdown-toggle d-flex align-items-center justify-content-between" type="button" id="countryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span id="selectedCountry">
+                                            <span id="selectedCountryText">-- Select One Option --</span>
+                                        </span>
+                                    </button>
+                                    <ul class="dropdown-menu w-100" aria-labelledby="countryDropdown">
+                                        <li>
+                                            <label class="dropdown-item d-flex align-items-center">
+                                                <input type="radio" name="education_choice" value="highschool" class="me-2 country-radio" required>
+                                                <img src="public/assets/img/icon/highschool.png" alt="highschool" width="25" class="me-2">
+                                                High School
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="dropdown-item d-flex align-items-center">
+                                                <input type="radio" name="education_choice" value="associateDegree" class="me-2 country-radio" required>
+                                                <img src="public/assets/img/icon/diploma-roll.png" alt="associateDegree" width="25" class="me-2">
+                                                Associate’s Degree
+                                            </label>
+                                        </li>
+                                        <li>
+                                          <label class="dropdown-item d-flex align-items-center">
+                                              <input type="radio" name="education_choice" value="Bachelor’s Degree" class="me-2 country-radio" required>
+                                              <img src="public/assets/img/icon/degree.png" alt="Bachelor’s Degree" width="25" class="me-2">
+                                              Bachelor’s Degree
+                                          </label>
+                                      </li>
+                                      <li>
+                                        <label class="dropdown-item d-flex align-items-center">
+                                            <input type="radio" name="education_choice" value="Master’s or Higher" class="me-2 country-radio" required>
+                                            <img src="public/assets/img/icon/masters.png" alt="Master’s or Higher" width="25" class="me-2">
+                                            Master’s or Higher 
+                                        </label>
+                                    </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                              <label class="form-label">What is your current employment status?</label>
+                              <div class="dropdown">
+                                  <button class="btn btn-outline-secondary w-100 dropdown-toggle d-flex align-items-center justify-content-between" type="button" id="countryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                      <span id="selectedCountry">
+                                          <span id="selectedCountryText">-- Select One Option --</span>
+                                      </span>
+                                  </button>
+                                  <ul class="dropdown-menu w-100" aria-labelledby="countryDropdown">
+                                      <li>
+                                          <label class="dropdown-item d-flex align-items-center">
+                                              <input type="radio" name="residency_choice" value="Employed" class="me-2 country-radio" required>
+                                              <img src="public/assets/img/icon/employed.png" alt="Employed" width="25" class="me-2">
+                                              Employed
+                                          </label>
+                                      </li>
+                                      <li>
+                                          <label class="dropdown-item d-flex align-items-center">
+                                              <input type="radio" name="residency_choice" value="Self-Employed" class="me-2 country-radio" required>
+                                              <img src="public/assets/img/icon/self-employed.png" alt="Self-Employed" width="25" class="me-2">
+                                              Self-Employed
+                                          </label>
+                                      </li>
+                                      <li>
+                                        <label class="dropdown-item d-flex align-items-center">
+                                            <input type="radio" name="residency_choice" value="Unemployed" class="me-2 country-radio" required>
+                                            <img src="public/assets/img/icon/unemployed.png" alt="Unemployed" width="25" class="me-2">
+                                            Unemployed
+                                        </label>
+                                    </li>
+                                    <li>
+                                      <label class="dropdown-item d-flex align-items-center">
+                                          <input type="radio" name="residency_choice" value="Student" class="me-2 country-radio" required>
+                                          <img src="public/assets/img/icon/student.png" alt="Student" width="25" class="me-2">
+                                          Student
+                                      </label>
+                                  </li>
+                                  <li>
+                                    <label class="dropdown-item d-flex align-items-center">
+                                        <input type="radio" name="residency_choice" value="Retired" class="me-2 country-radio" required>
+                                        <img src="public/assets/img/icon/retired.png" alt="Retired" width="25" class="me-2">
+                                        Retired
+                                    </label>
+                                </li>
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="mb-4">
+                            <label class="form-label">How soon are you looking to apply for assistance?</label>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary w-100 dropdown-toggle d-flex align-items-center justify-content-between" type="button" id="countryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span id="selectedCountry">
+                                        <span id="selectedCountryText">-- Select One Option --</span>
+                                    </span>
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="countryDropdown">
+                                    <li>
+                                        <label class="dropdown-item d-flex align-items-center">
+                                            <input type="radio" name="residency_choice" value="Immediately" class="me-2 country-radio" required>
+                                            <img src="public/assets/img/icon/immediately.png" alt="Immediately" width="25" class="me-2">
+                                            Immediately
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item d-flex align-items-center">
+                                            <input type="radio" name="residency_choice" value="Within 3 Months" class="me-2 country-radio" required>
+                                            <img src="public/assets/img/icon/three.png" alt="Within 3 Months" width="25" class="me-2">
+                                            Within 3 Months
+                                        </label>
+                                    </li>
+                                    <li>
+                                      <label class="dropdown-item d-flex align-items-center">
+                                          <input type="radio" name="residency_choice" value="Within 6 Months" class="me-2 country-radio" required>
+                                          <img src="public/assets/img/icon/six.png" alt="Within 6 Months" width="25" class="me-2">
+                                          Within 6 Months
+                                      </label>
+                                  </li>
+                                  <li>
+                                    <label class="dropdown-item d-flex align-items-center">
+                                        <input type="radio" name="residency_choice" value="Just Exploring Options" class="me-2 country-radio" required>
+                                        <img src="public/assets/img/icon/other.png" alt="Just Exploring Options" width="25" class="me-2">
+                                        Just Exploring Options
+                                    </label>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                              <div class="col-12 d-flex justify-content-lg-end" style="align-items: end;">
+                                <a class="submitbtn" href="index.html">
+                                  Submit
+                                </a>
+                              </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <!-- /form -->
-          </div>
+        </div>
+        
           <!--/column -->
         </div>
         <!-- /.row -->
       </div>
       <!--/.container -->
-      </div>
+      
 
       <footer class="bg-soft-primary">
         <div class="container py-13 py-md-15">
@@ -432,6 +680,7 @@
         </div>
         <!-- /.container -->
       </footer>
+    </div>
       <div class="progress-wrap">
         <svg
           class="progress-circle svg-content"
@@ -467,6 +716,95 @@
       this.reset(); // Clear the form fields
     });
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Handle "Next" button navigation
+      document.getElementById("personalNext").addEventListener("click", function () {
+          if (document.getElementById("personalForm").checkValidity()) {
+              $("#collapsePersonal").collapse('hide').on('hidden.bs.collapse', function () {
+                  $("#collapseEligibility").collapse('show');
+              });
+          } else {
+              document.getElementById("personalForm").reportValidity();
+          }
+      });
+  
+      document.getElementById("eligibilityNext").addEventListener("click", function () {
+          if (document.getElementById("eligibilityForm").checkValidity()) {
+              $("#collapseEligibility").collapse('hide').on('hidden.bs.collapse', function () {
+                  $("#collapseAdditional").collapse('show');
+              });
+          } else {
+              document.getElementById("eligibilityForm").reportValidity();
+          }
+      });
+  
+      // Handle accordion header click to toggle collapse
+      document.querySelectorAll(".card-header").forEach(header => {
+          header.addEventListener("click", function () {
+              let target = this.getAttribute("data-target");
+              let isCollapsed = document.querySelector(target).classList.contains("show");
+  
+              if (isCollapsed) {
+                  $(target).collapse("hide");
+              } else {
+                  $(".collapse").collapse("hide"); // Close other open sections
+                  $(target).collapse("show");
+              }
+          });
+      });
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".dropdown-menu input[type='radio']").forEach((radio) => {
+      radio.addEventListener("change", function () {
+        let selectedText = this.parentElement.textContent.trim(); 
+        let dropdownButton = this.closest(".dropdown").querySelector("button span");
+        dropdownButton.textContent = selectedText;
+        
+        // Close the dropdown after selection
+        let dropdownMenu = this.closest(".dropdown-menu");
+        let dropdown = new bootstrap.Dropdown(dropdownMenu.previousElementSibling);
+        dropdown.hide();
+      });
+    });
+  });
+
+  document.getElementById("submitForm").addEventListener("click", function () {
+    let isValid = true;
+
+    // Clear previous error messages
+    document.querySelectorAll(".error").forEach(error => error.textContent = "");
+
+    // Check Name, Email, Zip Code
+    ["name", "email", "zip"].forEach(field => {
+        let input = document.getElementById(field);
+        if (!input.value.trim()) {
+            document.getElementById("error-" + field).textContent = "This field is required!";
+            isValid = false;
+        }
+    });
+
+    // Check all dropdowns
+    ["dropdown1", "dropdown2", "dropdown3", "dropdown4", "dropdown5", "dropdown6", "dropdown7"].forEach(dropdown => {
+        let select = document.getElementById(dropdown);
+        if (!select.value) {
+            document.getElementById("error-" + dropdown).textContent = "Please select an option!";
+            isValid = false;
+        }
+    });
+    if (isValid) {
+        window.location.href = "index.html"; // Change this to your target URL
+    }
+
+    document.getElementById("navigateBtn").addEventListener("click", function() {
+    window.location.href = "index.html";
+  });
+    
+});
+</script>
+  
+  
     
     <script src="public/assets/js/plugins.js"></script>
     <script src="public/assets/js/theme.js"></script>
