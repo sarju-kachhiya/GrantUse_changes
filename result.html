@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grant Use</title>
+    <meta
+      name="description"
+      content="With our handy website, which provides an easy and quick method to unsubscribe from unsolicited emails and newsletters, you can take control of the clutter in your inbox."
+    />
+    <meta
+      name="keywords"
+      content="Grant Cardone, Grant Williams, Cary Grant, and Pella Grant"
+    />
+    <link rel="shortcut icon" href="public/assets/img/favicon.png" />
+    <link rel="stylesheet" href="public/assets/css/plugins.css" />
+    <link rel="stylesheet" href="public/assets/css/style.css" />
+    <link rel="stylesheet" href="public/assets/css/custom.css" />
+    <link
+      rel="preload"
+      href="public/assets/css/fonts/dm.css"
+      as="style"
+      onload="this.rel='stylesheet'"
+    />
+    <style>
+        .offer-section {
+    border-bottom: 1px solid #eee;
+}
+
+.offer {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.offer:hover{
+  border: 2px solid #000;
+}
+
+.offer-number {
+    font-size: 2em;
+    margin-right: 20px; /* Increased spacing */
+    color: #337ab7;
+}
+
+.offer-image img {
+    max-width: 100px;
+    height: auto;
+    margin-right: 30px; /* Increased spacing */
+}
+
+.offer-content {
+    flex-grow: 1;
+    margin-left: 15px; /* Add left margin to move text right */
+}
+
+.get-quote {
+    background-color: #3F78E0;
+    color: #f0f0f0;
+    padding: 15px 20px;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    text-decoration: none;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.get-quote:hover {
+  background-color: #3F78E0;
+  color: #f0f0f0;
+    text-decoration: none;
+    transform: translateY(calc(-60% - 3px)); /* Move 1px upwards from current position */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added shadow */
+}
+
+.click-free {
+    font-size: 0.8em;
+    color: #777;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .offer {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .offer-image img {
+        margin: 0 auto 10px;
+    }
+
+    .offer-content p {
+        display: none;
+    }
+
+    .click-free {
+        display: none;
+    }
+
+    .get-quote {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+        right: auto;
+    }
+}
+    </style>
+  </head>
+  <body>
+    <div class="content-wrapper">
+      <header class="wrapper bg-light">
+        <nav
+          class="navbar navbar-expand-lg center-nav transparent navbar-light"
+        >
+          <div class="container flex-lg-row flex-nowrap align-items-center">
+            <div class="navbar-brand w-100">
+              <a href="index.html">
+                <img src="public/assets/img/logo.png" alt="" />
+              </a>
+            </div>
+            <div
+              class="navbar-collapse offcanvas offcanvas-nav offcanvas-start"
+            >
+              <div class="offcanvas-header d-lg-none">
+                <h3 class="text-white fs-30 mb-0">Grant Use</h3>
+                <button
+                  type="button"
+                  class="btn-close btn-close-white"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+            </div>
+            <!-- /.navbar-collapse -->
+            <div class="navbar-other w-100 d-flex ms-auto">
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <li class="nav-item">
+                  <a href="#" class="btn btn-sm btn-primary rounded-pill"
+                    >Apply Now</a
+                  >
+                </li>
+                <li class="nav-item d-none">
+                  <button class="hamburger offcanvas-nav-btn">
+                    <span></span>
+                  </button>
+                </li>
+              </ul>
+              <!-- /.navbar-nav -->
+            </div>
+            <!-- /.navbar-other -->
+          </div>
+          <!-- /.container -->
+        </nav>
+        <!-- /.navbar -->
+      </header>
+      <!-- /header -->
+      <!-- /section -->
+      <div class="container" style="margin-top: 10px;">
+        <div class="form-group">
+            <label for="offerFilter">Filter Offers:</label>
+            <select class="form-control" id="offerFilter">
+              <option value="all">All Offers</option>
+              <option value="Otto Auto">Otto Auto</option>
+              <option value="Provide">Provide</option>
+              <option value="Everquote">Everquote</option>
+              <option value="Geico">Geico</option>  
+              <option value="Allstate">Allstate</option> 
+              <option value="Progressive">Progressive</option> 
+            </select>
+        </div>
+
+        <div id="offersContainer" style="margin-top: 40px;">
+            </div>
+    </div>
+    <footer class="bg-soft-primary">
+      <div class="container py-13 py-md-15">
+        <div class="row gy-6 gy-lg-0">
+          <div class="col-md-6 col-lg-4">
+            <div class="widget">
+              <img class="mb-4" src="public/assets/img/logo.png" alt="" />
+              <p class="mb-4">© 2023 grantuse. All rights reserved.</p>
+              <p class="mb-4 me-12">
+                This is a private website and is not endorsed by or affiliated
+                with any local, state or federal government agency or authority.
+              </p>
+              <nav class="nav social">
+                <a href="#"><i class="uil uil-twitter"></i></a>
+                <a href="#"><i class="uil uil-facebook-f"></i></a>
+                <a href="#"><i class="uil uil-dribbble"></i></a>
+                <a href="#"><i class="uil uil-instagram"></i></a>
+                <a href="#"><i class="uil uil-youtube"></i></a>
+              </nav>
+              <!-- /.social -->
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /column -->
+          <div class="col-md-6 col-lg-3 offset-lg-1">
+            <div class="widget">
+              <h4 class="widget-title mb-3">Useful Links</h4>
+              <ul class="list-unstyled text-reset mb-0">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="terms.html">TOS</a></li>
+                <li>
+                  <a href="privacy.html">Privacy Policy</a>
+                </li>
+                <li>
+                  <a href="unsubscribe.html">Unsubscribe</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /column -->
+          <div class="col-md-12 col-lg-4">
+            <div class="widget">
+              <h4 class="widget-title mb-3">Our Newsletter</h4>
+              <p class="mb-5">
+                Subscribe to our newsletter to get our news & deals delivered to
+                you.
+              </p>
+              <div class="newsletter-wrapper">
+                <!-- Begin Mailchimp Signup Form -->
+                <div id="mc_embed_signup2">
+                  <form
+                    action="https://elemisfreebies.us20.list-manage.com/subscribe/post?u=aa4947f70a475ce162057838d&amp;id=b49ef47a9a"
+                    method="post"
+                    id="mc-embedded-subscribe-form2"
+                    name="mc-embedded-subscribe-form"
+                    class="validate"
+                    target="_blank"
+                    novalidate
+                  >
+                    <div id="mc_embed_signup_scroll2">
+                      <div class="mc-field-group input-group form-floating">
+                        <input
+                          type="email"
+                          value=""
+                          name="EMAIL"
+                          class="required email form-control"
+                          placeholder="Email Address"
+                          id="mce-EMAIL2"
+                        />
+                        <label for="mce-EMAIL2">Email Address</label>
+                        <input
+                          type="submit"
+                          value="Join"
+                          name="subscribe"
+                          id="mc-embedded-subscribe2"
+                          class="btn btn-primary"
+                        />
+                      </div>
+                      <div id="mce-responses2" class="clear">
+                        <div
+                          class="response"
+                          id="mce-error-response2"
+                          style="display: none"
+                        ></div>
+                        <div
+                          class="response"
+                          id="mce-success-response2"
+                          style="display: none"
+                        ></div>
+                      </div>
+                      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                      <div
+                        style="position: absolute; left: -5000px"
+                        aria-hidden="true"
+                      >
+                        <input
+                          type="text"
+                          name="b_ddc180777a163e0f9f66ee014_4b1bcfa0bc"
+                          tabindex="-1"
+                          value=""
+                        />
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                  </form>
+                </div>
+                <!--End mc_embed_signup-->
+              </div>
+              <!-- /.newsletter-wrapper -->
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /column -->
+        </div>
+        <!--/.row -->
+      </div>
+      <!-- /.container -->
+    </footer>
+    <div class="progress-wrap">
+      <svg
+        class="progress-circle svg-content"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+      </svg>
+    </div>
+    <script src="public/assets/js/plugins.js"></script>
+    <script src="public/assets/js/theme.js"></script>
+    <script src="public/assets/js/jquery-3.7.1.min.js"></script>
+    <script src="public/assets/js/jquery.validate.min.js"></script>
+    <script src="public/assets/js/additional-methods.min.js"></script>
+
+    <script src="public/assets/js/contact_us.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        
+    document.addEventListener('DOMContentLoaded', function() {
+      const offersData = [
+            {
+                number: 1,
+                image: "public/assets/img/offers/1.jpg",
+                name: "Women’s Business Grant – Up to $10,000",
+                description: "Provides funding for women entrepreneurs to start or expand their businesses. This grant covers <br> startup costs, marketing, and operational expenses.",
+                // clickFree: "click For FREE Qoute"
+            },
+            {
+                number: 2,
+                image: "public/assets/img/offers/2.jpg",
+                name: "Pell Grant – Up to $7,395 per year",
+                description: "Federal financial aid for low-income students pursuing higher education. It helps cover tuition, <br> books, and other school-related expenses.",
+                // clickFree: "click For FREE Qoute"
+            },
+            {
+                number: 3,
+                image: "public/assets/img/offers/3.jpg",
+                name: "First-Time Homebuyer Grant – Up to $15,000",
+                description: "Assists first-time buyers with down payments and closing costs. Available to eligible applicants <br> purchasing their first home.",
+                // clickFree: "click For FREE Qoute"
+            },
+            {
+                number: 4,
+                image: "public/assets/img/offers/4.jpg",
+                name: "Veterans Small Business Grant – Up to $5,000",
+                description: "Helps veterans transition to entrepreneurship by providing funding for business startup costs, equipment, <br> and operations.",
+                // clickFree: "click For FREE Qoute"
+            },
+            {
+                number: 5,
+                image: "public/assets/img/offers/5.jpg",
+                name: "Debt Relief Grant – Up to $50,000",
+                description: "Provides financial assistance to pay off student loans, medical bills, or high-interest credit card <br> debt. Eligibility varies by income and need.",
+                // clickFree: "click For FREE Qoute"
+            },
+            {
+                number: 6,
+                image: "public/assets/img/offers/1.jpg",
+                name: "Workforce Training Grant – Up to $8,000",
+                description: "Covers tuition for job training programs in high-demand industries. Ideal for individuals looking to upskill <br> or change careers.",
+                // clickFree: "click For FREE Qoute"
+            }
+        ];
+
+        const offersContainer = document.getElementById('offersContainer');
+        const filterSelect = document.getElementById('offerFilter');
+
+        function renderOffers(offers) {
+            offersContainer.innerHTML = '';
+            offers.forEach(offer => {
+                const offerHtml = `
+                    <div class="offer-section">
+                        <div class="offer">
+                            <div class="offer-number">${offer.number}</div>
+                            <div class="offer-image">
+                                <img src="${offer.image}" alt="${offer.name} Logo">
+                            </div>
+                            <div class="offer-content">
+                                <h3>${offer.name}</h3>
+                                <p>${offer.description}</p>
+                            </div>
+                            <a href="#" class="get-quote"><b>GET QUOTE →</b></a>
+                        </div>
+                    </div>
+                `;
+                offersContainer.innerHTML += offerHtml;
+            });
+        }
+
+        function filterOffers(selectedValue) {
+            if (selectedValue === 'all') {
+                renderOffers(offersData);
+            } else {
+                const filteredOffers = offersData.filter(offer => offer.name === selectedValue);
+                renderOffers(filteredOffers);
+            }
+        }
+
+        filterSelect.addEventListener('change', function() {
+            const selectedValue = this.value;
+            filterOffers(selectedValue);
+        });
+
+        // Initial render
+        renderOffers(offersData);
+    });
+</script>
+  </body>
+</html>
